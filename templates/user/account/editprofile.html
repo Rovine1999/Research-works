@@ -1,0 +1,180 @@
+{% extends './../../components/base.html' %}
+
+{% block title %}
+    DOLCE - {{ request.user.first_name }} {{ request.user.last_name }} | Edit profile
+{% endblock title %}
+{% load static %}
+
+{% block content %}
+     <main id="main container">
+     <div class="mailer-form mt-5 pt-5">
+        <div class="mailer-holder">
+            <div class="left">
+                <div class="header">
+                    <h2> Edit your profile </h2>
+                </div>
+            </div>
+            <div class="right">
+                <div class="body">
+                    {% for message in messages %}
+                        <div class="login-error error-failed">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <form method="post" action="{% url 'editprofile' %}" id="emailer">
+                      {% csrf_token %}
+
+                        <div class="input-holder">
+                            <label>First name</label>
+                            <input type="text" name="fname" placeholder="First name" value="{{ request.user.first_name }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Last name</label>
+                            <input type="text" name="lname" placeholder="Last name" value="{{ request.user.last_name }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Email</label>
+                            <input type="text" name="email" placeholder="Email" value="{{ request.user.email }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Username</label>
+                            <input type="text" name="username" placeholder="Username" value="{{ request.user.username }}">
+                        </div>
+
+<!--                        <div class="input-holder">-->
+<!--                            <label>Password</label>-->
+<!--                            <input type="password" name="password" placeholder="Password">-->
+<!--                        </div>-->
+
+<!--                        <div class="input-holder">-->
+<!--                            <label>Password repeat</label>-->
+<!--                            <input type="password" name="password1" placeholder="Repeat password">-->
+<!--                        </div>-->
+
+                        <div class="input-holder">
+                            <label>Address</label>
+                            <input type="text" name="address" placeholder="Address" value="{{ request.user.userprofile.address }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Secondary Email</label>
+                            <input type="text" name="sec_email" placeholder="Your secondary email (if you have one)" value="{{ request.user.userprofile.secondary_email }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Postal Code</label>
+                            <input type="text" name="postal_code" placeholder="Postal Code" value="{{ request.user.userprofile.postal_code }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>City</label>
+                            <input type="text" name="city" placeholder="City" value="{{ request.user.userprofile.city }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Phone Number</label>
+                            <input type="text" name="phone_number" placeholder="Phone Number" value="{{ request.user.userprofile.phone_number }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Alternate Phone Number</label>
+                            <input type="text" name="alt_phone_number" placeholder="Alternate Phone Number" value="{{ request.user.userprofile.alt_phone_number }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Professional field</label>
+                            <input type="text" name="prof_field" placeholder="Your professional field" value="{{ request.user.userprofile.professional_field }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Age</label>
+                            <input type="text" name="age" placeholder="Age" value="{{ request.user.userprofile.age }}">
+                        </div>
+
+                        <div class="input-holder d-flex justify-content-evenly align-items-center flex-row">
+                            <label>Male</label>
+                            <input type="radio" name="gender" value="male" {% if request.user.userprofile.gender == "male" %} checked {% endif %} >
+                            <label>Female</label>
+                            <input type="radio" name="gender" value="female" {% if request.user.userprofile.gender == "female" %} checked {% endif %}>
+                            <label>Other</label>
+                            <input type="radio" name="gender" value="other" {% if request.user.userprofile.gender == "other" %} checked {% endif %}>
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Skills(comma separated)</label>
+                            <input type="text" name="skills" placeholder="Skills" value="{{ request.user.userprofile.skills }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Specialities(comma separated)</label>
+                            <input type="text" name="specialities" placeholder="Specialities" value="{{ request.user.userprofile.specialities }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Portfolio URL</label>
+                            <input type="url" name="web" placeholder="Portfolio URL" value="{{ request.user.userprofile.personal_website }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Github Username(if you have one)</label>
+                            <input type="text" name="github" placeholder="Github Username" value="{{ request.user.userprofile.github }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Facebook Username(if you have one)</label>
+                            <input type="text" name="facebook" placeholder="Facebook Username" value="{{ request.user.userprofile.facebook }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Instagram Username(if you have one)</label>
+                            <input type="text" name="instagram" placeholder="Instagram Username" value="{{ request.user.userprofile.instagram }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Twitter Handle(if you have one)</label>
+                            <input type="text" name="twitter" placeholder="Twitter Handle" value="{{ request.user.userprofile.twitter }}">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Bio</label>
+                            <textarea type="text" name="bio" placeholder="Tell us more about yourself">{{ request.user.userprofile.bio }}</textarea>
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Timezone</label>
+                            <input type="text" list="timezones" name="timezone" value="{{ request.user.userprofile.time_zone }}">
+                                <datalist id="timezones">
+                                    {% for t_z in timezones %}
+                                        <option value="{{ t_z }}"{% if request.user.userprofile.time_zone == t_z %} selected {% endif %}/>
+                                    {% endfor %}
+                                </datalist>
+                        </div>
+
+                        <div class="input-holder">
+                            <button type="submit" name="send" id="send_btn">
+                              Save changes
+                            </button>
+                        </div>
+
+                    </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+<!--        <div class="footer-links">-->
+<!--            <a href="https://web.facebook.com/Mangoke-100719798561368/?_rdc=1&_rdr"> <img src="https://img.icons8.com/color/48/000000/facebook-circled&#45;&#45;v1.png" alt="F"/> </a>-->
+<!--            <a href="https://ke.linkedin.com/company/mango-ke?trk=public_profile_experience-item_result-card_image-click"> <img src="https://img.icons8.com/color/48/000000/linkedin-2&#45;&#45;v2.png" alt="L" /> </a>-->
+<!--            <a href="https://twitter.com/Mango_hosting"> <img src="https://img.icons8.com/color/48/000000/twitter&#45;&#45;v2.png" alt="T"/> </a>-->
+<!--            <a href="https://www.instagram.com/mango_hosting/"> <img src="https://img.icons8.com/color/48/000000/instagram-new&#45;&#45;v2.png" alt="I" /> </a>-->
+<!--        </div>-->
+
+     </div>
+     </main>
+
+
+{% endblock %}

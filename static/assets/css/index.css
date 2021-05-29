@@ -1,0 +1,49 @@
+:root{
+    --failed-color: #ff0000;
+  	--failed-bg: rgba(255, 0, 0, 0.205);
+
+  	--pending-color: #bbac00fa;
+  	--pending-bg: rgb(214 255 0 / 20%);
+
+  	--sent-color: #008000;
+  	--sent-bg: rgba(0, 128, 0, 0.205);
+}
+
+.error-failed{
+  background: var(--failed-bg);
+  color: var(--failed-color);
+}
+
+.profile-pic-holder{
+    width: 160px !important;
+    height: 160px !important;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #fff;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 10px #aaa;
+}
+
+.profile-pic-holder img{
+    width: 100%;
+    height: 100%;
+}
+
+@media screen and (max-width: 768px){
+    .col-flex{
+        flex-direction: column;
+    }
+}
+
+body{
+    /* background: whitesmoke !important; */
+}
+
+.corners-20 .modal-content{
+    border-radius: 20px !important;
+    overflow: hidden !important;
+    border: none !important;
+}

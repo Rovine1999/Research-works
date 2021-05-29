@@ -1,0 +1,111 @@
+{% extends './../../components/base.html' %}
+{% block title %}
+    DOLCE - Pending Orders
+{% endblock title %}
+{% load static %}
+
+{% block content %}
+<main id="main container-fluid">
+    <div class="container-fluid mt-5 pt-5 pb-5 mb-5">
+        <div class="row my-3">
+            <div class="col">
+                <h1 class="text-center"> Pending Orders </h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+
+                <div class="card raised-card p-3">
+                    <div class="card-headr">
+                        <div class="row my-3">
+                            <div class="col">
+                                <form class="raised-card p-3 mb-0">
+                                    <h2>Do a quick search</h2>
+                                  <div class="row align-items-center">
+                                    <div class="col-md-2 col-sm-12">
+                                        <label> Select field </label>
+                                        <select type="text" class="form-control" placeholder="City">
+                                            <option selected> Select field...</option>
+                                            <option value="computer science"> Computer Science </option>
+                                        </select>
+                                    </div>
+                                      <div class="col-md-2 col-sm-12">
+                                        <label> Select filter </label>
+                                        <select type="text" class="form-control" placeholder="City">
+                                            <option selected> Select field...</option>
+                                            <option value="computer science"> Computer Science </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12">
+                                        <label>Search Text</label>
+                                        <input type="text" class="form-control" placeholder="Enter search text...">
+                                    </div>
+                                      <div class="col-md-2 col-sm-12">
+                                        <label>From</label>
+                                        <input type="date" class="form-control" placeholder="From">
+                                      </div>
+                                      <div class="col-md-2 col-sm-12">
+                                          <label>To</label>
+                                        <input type="date" class="form-control" placeholder="To">
+                                      </div>
+                                  </div>
+                                    <div class="row mt-2">
+                                      <div class="col-auto">
+                                        <button type="submit" class="btn btn-primary mb-2">Search</button>
+                                      </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table mb-0 border-none">
+                            <thead class="table-head b-none">
+                                <tr class="b-none" style="border: none !important;">
+                                    <th scope="col"> Order ID </th>
+                                    <th scope="col"> Subject </th>
+                                    <th scope="col"> Topic </th>
+                                    <th scope="col"> Pages </th>
+                                    <th scope="col"> Due Date </th>
+                                    <th scope="col"> Cost </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="py-2 my-2">
+                                    <th scope="row">1</th>
+                                    <td>Cell<br>cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                    <td>Cell</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</main>
+
+
+{% endblock %}

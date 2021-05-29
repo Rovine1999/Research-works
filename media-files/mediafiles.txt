@@ -1,0 +1,1 @@
+Contains all media files such as image uploads and file uploads

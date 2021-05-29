@@ -1,0 +1,123 @@
+{% load static %}
+<!-- ======= Header ======= -->
+  <header id="header" class="fixed-top d-flex align-items-center py-1">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo me-auto"><a href="{% url 'home' %}">DOLCE</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+<!--       <a href="{% url 'home' %}" class="logo me-auto"><img src="{% static 'assets/img/logo.png' %}" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar py-0">
+        <ul>
+          <li><a href="{% url 'home' %}" {% if page == 'home' %} class="active" {% endif %}>Home</a></li>
+
+          <li class="dropdown"><a href="#"><span>Account</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              {% if request.user.is_authenticated %}
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+
+                <li class="dropdown"><a href="#"><span>Orders</span> <i class="bi bi-chevron-down"></i></a>
+                  <ul>
+                    <li><a href="{% url 'pending_orders' %}" {% if page == 'orders_pending' %} class="active" {% endif %}>Pending</a></li>
+                    <li><a href="{% url 'completed_orders' %}" {% if page == 'orders_completed' %} class="active" {% endif %}>Completed</a></li>
+                    <li><a href="{% url 'revision_orders' %}" {% if page == 'orders_revisions' %} class="active" {% endif %}>Revisions</a></li>
+                    <li><a href="{% url 'rated_orders' %}" {% if page == 'orders_rated' %} class="active" {% endif %}>Rated orders</a></li>
+                    <li><a href="{% url 'feedback_orders' %}" {% if page == 'orders_feedback' %} class="active" {% endif %}>Customers' feedback</a></li>
+                  </ul>
+                </li>
+
+                <li class="dropdown"><a href="#"><span>Payments</span> <i class="bi bi-chevron-down"></i></a>
+                  <ul>
+                    <li><a href="{% url 'payments_history' %}" {% if page == 'payments_history' %} class="active" {% endif %}>History</a></li>
+                    <li><a href="{% url 'payments_upcoming' %}" {% if page == 'payments_upcoming' %} class="active" {% endif %}>Upcoming</a></li>
+                    <li><a href="{% url 'payments_bonuses' %}" {% if page == 'payments_bonuses' %} class="active" {% endif %}>Monthly bonuses</a></li>
+                  </ul>
+                </li>
+
+<!--                <li><a href="{% url 'logout' %}">Logout</a></li>-->
+              {% else %}
+                <li><a href="{% url 'signup' %}" {% if page == 'signup' %} class="active" {% endif %}>Sign Up</a></li>
+                <li><a href="{% url 'login' %}" {% if page == 'login' %} class="active" {% endif %}>Login</a></li>
+              {% endif %}
+              <li class="dropdown"><a href="#"><span>News</span> <i class="bi bi-chevron-down"></i></a>
+                  <ul>
+                    <li><a href="#">Recent news</a></li>
+                    <li><a href="#">Archive</a></li>
+                  </ul>
+                </li>
+            </ul>
+          </li>
+
+<!--          <li class="dropdown"><a href="#"><span>About</span> <i class="bi bi-chevron-down"></i></a>-->
+<!--            <ul>-->
+<!--              <li><a href="about.html">About</a></li>-->
+<!--              <li><a href="team.html">Team</a></li>-->
+<!--              <li><a href="testimonials.html">Testimonials</a></li>-->
+
+<!--              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>-->
+<!--                <ul>-->
+<!--                  <li><a href="#">Deep Drop Down 1</a></li>-->
+<!--                  <li><a href="#">Deep Drop Down 2</a></li>-->
+<!--                  <li><a href="#">Deep Drop Down 3</a></li>-->
+<!--                  <li><a href="#">Deep Drop Down 4</a></li>-->
+<!--                  <li><a href="#">Deep Drop Down 5</a></li>-->
+<!--                </ul>-->
+<!--              </li>-->
+<!--            </ul>-->
+<!--          </li>-->
+
+          <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              {% if request.user.is_authenticated %}
+                <li><a href="{% url 'onlinewriting' %}" {% if page == 'onlinewriting' %} class="active" {% endif %}>Freelance</a></li>
+                <li><a href="{% url 'home' %}" {% if page == 'services' %} class="active" {% endif %}>Research papers</a></li>
+                <li><a href="{% url 'home' %}" {% if page == 'services' %} class="active" {% endif %}>House decoration</a></li>
+                <li><a href="{% url 'home' %}" {% if page == 'services' %} class="active" {% endif %}>Fashion design</a></li>
+                <li><a href="{% url 'home' %}" {% if page == 'services' %} class="active" {% endif %}>Building and construction</a></li>
+                <li><a href="{% url 'home' %}" {% if page == 'services' %} class="active" {% endif %}>Art and design</a></li>
+              {% else %}
+                <li><a href="{% url 'signup' %}" {% if page == 'signup' %} class="active" {% endif %}>Sign Up</a></li>
+                <li><a href="{% url 'login' %}" {% if page == 'login' %} class="active" {% endif %}>Login</a></li>
+              {% endif %}
+            </ul>
+          </li>
+
+          <li><a href="#" {% if page == 'blog' %} class="active" {% endif %}>Blog</a></li>
+
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="{% url 'home' %}" {% if page == 'home' %} class=" getstarted active" {% else %} class=" getstarted" {% endif %}>Get Started</a></li>
+
+          {% if  request.user.is_authenticated %}
+          <li class="dropdown">
+            <a href="#">
+              <img src="{{ MEDIA_URL }}/{{request.user.userprofile.profile_photo}}" width="40" height="40" t class="rounded-circle mr-2" alt="{{ request.user.first_name }}" /><span class="mx-2">{{ request.user.first_name }}</span> <i class="bi bi-chevron-down"></i>
+            </a>
+            <ul>
+              <li> <a class="d-flex justify-content-start" href="{% url 'profile' %}"><i class="fa fa-user mr-2 pr-2" style="font-size: 20px"></i> <span class="mx-3">Profile</span></a></li>
+              <li> <a class="d-flex justify-content-start" href="#"><i class="fa fa-line-chart mr-2 pr-2" style="font-size: 20px"></i> <span class="mx-3">Analytics</span></a></li>
+<!--              <div class="dropdown-divider"></div>-->
+              <li><a class="d-flex justify-content-start" href="#"><i class="fa fa-cog mr-2 pr-2" style="font-size: 20px"></i> <span class="mx-3">Settings & Privacy</span></a></li>
+              <li><a class="d-flex justify-content-start" href="#"><i class="fa fa-question mr-2 pr-2" style="font-size: 20px"></i> <span class="mx-3">Help Center</span></a></li>
+<!--              <div class="dropdown-divider"></div>-->
+              <li><a class="d-flex justify-content-start" href="{% url 'logout' %}"><i class="fa fa-sign-out mr-2 pr-2" style="font-size: 20px"></i> <span class="mx-3">Logout</span></a></li>
+            </ul>
+          </li>
+          {% endif %}
+
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+  </symbol>
+  <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+  </symbol>
+  <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+    <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+  </symbol>
+</svg>

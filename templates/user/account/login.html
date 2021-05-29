@@ -1,0 +1,62 @@
+{% extends './../../components/base.html' %}
+{% block title %}
+    DOLCE - Login
+{% endblock title %}
+{% load static %}
+
+{% block content %}
+     <main id="main container">
+     <div class="mailer-form mt-5 pt-5">
+        <div class="mailer-holder">
+            <div class="left">
+                <div class="header">
+                    <h2> Login to your account </h2>
+                </div> 
+            </div>
+            <div class="right">
+                <div class="body">
+                    {% for message in messages %}
+                        <div class="login-error error-failed">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <form method="post" action="{% url 'login' %}" id="emailer">
+                      {% csrf_token %}
+
+                        <div class="input-holder">
+                            <label>Username</label>
+                            <input type="text" name="username" placeholder="Username">
+                        </div>
+
+                        <div class="input-holder">
+                            <label>Password</label>
+                            <input type="password" name="password" placeholder="Password">
+                        </div>
+
+                        <div class="input-holder">
+                            <button type="submit" name="send" id="send_btn">
+                              Login
+                            </button>
+                        </div>
+                        <div class="forgot-password mails-total text-center">
+                            <a href="{% url 'password_reset' %}">Forgot password?</a>
+                        </div>
+                    </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+<!--        <div class="footer-links">-->
+<!--            <a href="https://web.facebook.com/Mangoke-100719798561368/?_rdc=1&_rdr"> <img src="https://img.icons8.com/color/48/000000/facebook-circled&#45;&#45;v1.png" alt="F"/> </a>-->
+<!--            <a href="https://ke.linkedin.com/company/mango-ke?trk=public_profile_experience-item_result-card_image-click"> <img src="https://img.icons8.com/color/48/000000/linkedin-2&#45;&#45;v2.png" alt="L" /> </a>-->
+<!--            <a href="https://twitter.com/Mango_hosting"> <img src="https://img.icons8.com/color/48/000000/twitter&#45;&#45;v2.png" alt="T"/> </a>-->
+<!--            <a href="https://www.instagram.com/mango_hosting/"> <img src="https://img.icons8.com/color/48/000000/instagram-new&#45;&#45;v2.png" alt="I" /> </a>-->
+<!--        </div>-->
+
+     </div>
+     </main>
+
+
+{% endblock %}

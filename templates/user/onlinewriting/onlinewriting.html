@@ -1,0 +1,130 @@
+{% extends './../../components/base.html' %}
+{% block title %}
+    DOLCE - Find a freelance job
+{% endblock title %}
+{% load static %}
+
+{% block content %}
+<main id="main container">
+    <div class="container mt-5 pt-5 pb-5 mb-5">
+        <div class="row">
+            <div class="col d-flex justify-content-between">
+                <h1>Questions</h1>
+                <a href="{% url 'post_project' %}" class="btn btn-outline-primary  btn-round d-flex align-items-center justify-content-center">
+                    <span> <i class="fa fa-plus"></i> </span>
+                    <span>Post a new question</span>
+                </a>
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col">
+                <form class="raised-card p-3 mb-0">
+                    <h2>Do a quick search</h2>
+                  <div class="row align-items-center">
+                    <div class="col-md-2 col-sm-12">
+                        <label> Select field </label>
+                        <select type="text" class="form-control" placeholder="City">
+                            <option selected> Select field...</option>
+                            <option value="computer science"> Computer Science </option>
+                        </select>
+                    </div>
+                      <div class="col-md-2 col-sm-12">
+                        <label> Select filter </label>
+                        <select type="text" class="form-control" placeholder="City">
+                            <option selected> Select field...</option>
+                            <option value="computer science"> Computer Science </option>
+                        </select>
+                    </div>
+                    <div class="col-md-4 col-sm-12">
+                        <label>Search Text</label>
+                        <input type="text" class="form-control" placeholder="Enter search text...">
+                    </div>
+                      <div class="col-md-2 col-sm-12">
+                        <label>From</label>
+                        <input type="date" class="form-control" placeholder="From">
+                      </div>
+                      <div class="col-md-2 col-sm-12">
+                          <label>To</label>
+                        <input type="date" class="form-control" placeholder="To">
+                      </div>
+                  </div>
+                    <div class="row mt-2">
+                      <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-2">Search</button>
+                      </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {% for project in projects %}
+        <div class="card mt-5 border-5 pt-2 active pb-0 px-3 raised-card">
+             <div class="card-body ">
+                 <div class="row">
+                     <div class="col-12 ">
+                         <h4 class="card-title "><b> {{ project.topic }} </b></h4>
+                     </div>
+                     <div class="col-12">
+                         <h6 class="card-subtitle mb-2 text-muted">
+                             <p class="card-text text-muted small "> <img src="https://img.icons8.com/metro/26/000000/star.png" class="mr-1 " width="19" height="19" id="star">
+                                 <span class="vl mr-2 ml-0"></span>
+                                 Posted by <span class="font-weight-bold"> {{ project.posted_by.username }} </span> {{ project.posted_on }} - <span class="text-info"> Due Date {{ project.due_date }} </span>
+                             </p>
+                         </h6>
+                     </div>
+                     <div class="col-12">
+                         <h5> {{ project.subject }} </h5>
+                         <p class="text-lead">
+                             {{project.description}}
+                         </p>
+                     </div>
+                 </div>
+             </div>
+             <div class="card-footer bg-white px-0 ">
+                 <div class="row">
+                     <div class=" col-md-auto ">
+                         <a href="#" class="btn btn-outlined btn-black text-info bg-transparent" data-wow-delay="0.7s">
+                             <i class="fa fa-link"></i>
+                             <span>Attachments:</span>
+                         </a>
+
+                         {% for file in project.files|slice:5 %}
+                         <a href="{{ MEDIA_URL }}{{ file.file }}" class="btn btn-outlined btn-black text-muted bg-transparent" data-wow-delay="0.7s" title="download" download>
+                             <i class="fa fa-file"></i>
+                             <span>{{file.file}}</span>
+                             <i class="fa fa-download"></i>
+                         </a>
+                         {% endfor %}
+                         {% if project.files|length > 5 %}
+                            <i class="fa fa-ellipsis-h"></i>
+                         {% elif project.files|length == 0 %}
+                            <span> No attached files </span>
+                         {% endif %}
+                         </a> <span class="vl ml-3"></span>
+                     </div>
+                     <div class="col-md-auto ">
+                         <ul class="list-inline">
+                             {% for bidder in project.bidders|slice:5 %}
+                                <li class="list-inline-item"> <img src="{{MEDIA_URL}}{{bidder.userprofile.profile_photo}}" alt="DP" class="rounded-circle" width="35px" height="35px"> </li>
+                             {% endfor %}
+                             {% if project.bidders|length > 5 %}
+                                <i class="fa fa-ellipsis-h"></i>
+                             {% elif project.bidders|length == 0 %}
+                                <span> Be the first bidder </span>
+                             {% endif %}
+                         </ul>
+                     </div>
+                     <div class="col-md-auto ml-auto">
+                         <button class="btn btn-outline-info btn-round">Bid On This</button>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
+        {% endfor %}
+
+    </div>
+</main>
+
+
+{% endblock %}

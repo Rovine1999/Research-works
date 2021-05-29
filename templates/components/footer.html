@@ -1,0 +1,189 @@
+{% load static %}
+
+<div class="modal fade corners-20" id="changeProfilePic" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Change profile picture</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col d-flex justify-content-center align-items-center col-flex">
+<!--            <div class="profile-pic-holder"></div>-->
+            <div class="profile-pic-holder m-1">
+              <img id="profile-pic-img"
+                 alt="{{ request.user.first_name }} {{ request.user.last_name }} profile"
+                 class="rounded-circle m-3">
+            </div>
+            <div class="d-flex h-100 justify-content-center align-items-center">
+              <i class="fa fa-arrow-right"></i>
+            </div>
+            <div class="profile-pic-holder d-none m-1 picdiv">
+              <img id="profile-pic-img-output"
+                 src=""
+                 alt="{{ request.user.first_name }} {{ request.user.last_name }} profile pic preview"
+                 class="rounded-circle m-3">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <form action="{% url 'change_pic' %}" accept="image/*" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="input-holder">
+                <input id="pic-input" type="file" name="profile_photo">
+              </div>
+
+              <div class="input-holder">
+                <button class="btn btn-primary-outline btn-block"> Change </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade corners-20" id="changePassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="change-title">Change password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col d-flex justify-content-center align-items-center col-flex">
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <form action="{% url 'change_password' %}" method="post">
+              {% csrf_token %}
+              <div class="input-holder">
+                <label>Old Password</label>
+                <input type="password" name="old_password">
+              </div>
+
+              <div class="input-holder">
+                <label>New Password</label>
+                <input type="password" name="new_password">
+              </div>
+
+              <div class="input-holder">
+                <label>Repeat Password</label>
+                <input type="password" name="new_password_repeat">
+              </div>
+
+              <div class="input-holder">
+                <button class="btn btn-primary-outline btn-block"> Change </button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>DOLCE</h3>
+              <p>
+                A108 Ronald Ngara Street <br>
+                Nairobi 00107, Kenya<br><br>
+                <strong>Phone:</strong> +254 7 59 000 000<br>
+                <strong>Email:</strong> info@example.com<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="{% url 'home' %}">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Online writing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Project research</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">House decoration</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Fashion design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Building and construction</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Art and design</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Subscribe to our newsletter and be the first one to get our latest updates</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>DOLCE</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/sailor-free-bootstrap-theme/ -->
+<!--        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>-->
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+  <script src="{% static 'assets/js/index.js' %}"></script>
